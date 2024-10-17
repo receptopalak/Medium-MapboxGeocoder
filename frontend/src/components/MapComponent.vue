@@ -137,6 +137,8 @@ onMounted(() => {
   // Harita Üzerinde Bir Noktaya Tıklanınca Popup Açma
   map.on("click", "stations", (e) => {
     if (e.features.length > 0) {
+
+      
       const feature = e.features[0];
       currentFeature.value = feature;
       isSidebarOpen.value = true;
