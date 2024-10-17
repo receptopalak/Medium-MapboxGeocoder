@@ -12,6 +12,7 @@
     "@mapbox/mapbox-gl-geocoder": "^5.0.3",
     "axios": "^1.7.7",
     "mapbox-gl": "^3.7.0",
+    "primeicons": "^7.0.0",
     "primevue": "^4.1.1",
     "vue": "^3.5.12"
   },
