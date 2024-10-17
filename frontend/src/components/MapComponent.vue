@@ -20,7 +20,7 @@ import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "mapbox-gl/dist/mapbox-gl.css";
-
+import "primeicons/primeicons.css";
 import axios from "axios";
 
 const mapContainer = ref(null);
@@ -119,6 +119,34 @@ onMounted(() => {
     reverseGeocode: true,
     localGeocoder: coordinatesGeocoder,
     externalGeocoder: externalGeocoderFunction,
+    getItemValue: function (item) {
+      return item.place_name;
+    },
+    render: function (item) {
+      const stationElement =
+        '<li id="stationResultHeader" class=""><a><div class="mapboxgl-ctrl-geocoder--suggestion"><div class="mapboxgl-ctrl-geocoder--suggestion-title stationResult">İstasyonlar</div></div></a></li>';
+      const mbElement =
+        '<li id="mbResultHeader" class=""><a><div class="mapboxgl-ctrl-geocoder--suggestion"><div class="mapboxgl-ctrl-geocoder--suggestion-title stationResult">Arama Sonuçları</div></div></a></li>';
+
+      if (item?.resultType == "Section") {
+        return (
+          '<div class="mapboxgl-ctrl-geocoder--suggestion"><div class="mapboxgl-ctrl-geocoder--suggestion-title stationResult"><i class="pi pi-check" style="font-size: 1rem"></i> (E) ' +
+          item.place_name +
+          '</div><div class="mapboxgl-ctrl-geocoder--suggestion-address">' +
+          item.text +
+          "</div></div>"
+        );
+      } else {
+        var placeName = item.place_name.split(",");
+        return (
+          '<div class="mapboxgl-ctrl-geocoder--suggestion"><div class="mapboxgl-ctrl-geocoder--suggestion-title mapboxResult">' +
+          placeName[0] +
+          '</div><div class="mapboxgl-ctrl-geocoder--suggestion-address">' +
+          placeName.splice(1, placeName.length).join(",") +
+          "</div></div>"
+        );
+      }
+    },
   });
 
   // Geocoding Bileşenini Haritaya Ekleme
@@ -137,8 +165,6 @@ onMounted(() => {
   // Harita Üzerinde Bir Noktaya Tıklanınca Popup Açma
   map.on("click", "stations", (e) => {
     if (e.features.length > 0) {
-
-      
       const feature = e.features[0];
       currentFeature.value = feature;
       isSidebarOpen.value = true;
@@ -157,7 +183,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 #map {
   min-height: 98vh;
   width: 100%;
