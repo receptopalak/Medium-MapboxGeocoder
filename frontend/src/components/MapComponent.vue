@@ -155,6 +155,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 #map {
   min-height: 98vh;
   width: 100%;
