@@ -156,7 +156,7 @@ onMounted(() => {
 
 <style scoped>
 #map {
-  min-height: 80vh;
+  min-height: 98vh;
   width: 100%;
   border-radius: 1em;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
